@@ -1,10 +1,7 @@
 #pragma once
 #include "Point.h"
 #include "Snake.h"
-#include "SnakeCollisionEngine.h"
 #include "Map.h"
-#include <time.h>
-#include <stdlib.h>
 
 class Score
 {
