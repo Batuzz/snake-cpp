@@ -2,3 +2,4 @@ Debug/*
 Snake.vcxproj
 Snake.vcxproj.filters
 Snake.vcxproj.user
+Release/*
