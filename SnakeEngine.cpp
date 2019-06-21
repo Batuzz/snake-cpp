@@ -2,7 +2,7 @@
 #include <iostream>
 #include <windows.h>
 
-SnakeEngine::SnakeEngine(GraphicsEngine* graphicsEngine, Snake* snake, Score* score, Map* map, ScoreCollisionEngine* scoreCollisionEngine, SnakeCollisionEngine* snakeCollisionEngine, WallCollisionEngine* wallCollisionEngine, AbstractController* controlManager) {
+SnakeEngine::SnakeEngine(GraphicsEngine* graphicsEngine, Snake* snake, Score* score, Map* map, ScoreCollisionEngine* scoreCollisionEngine, SnakeCollisionEngine* snakeCollisionEngine, WallCollisionEngine* wallCollisionEngine, AbstractController* controlManager, int speed) {
 	this->snake = snake;
 	this->score = score;
 	this->map = map;
@@ -10,6 +10,7 @@ SnakeEngine::SnakeEngine(GraphicsEngine* graphicsEngine, Snake* snake, Score* sc
 	this->snakeCollisionEngine = snakeCollisionEngine;
 	this->wallCollisionEngine = wallCollisionEngine;
 	this->controlManager = controlManager;
+	this->speed = speed;
 }
 
 void SnakeEngine::run() {
@@ -42,7 +43,7 @@ void SnakeEngine::run() {
 			this->graphicsEngine->eraseSnakeElement(this->snake->getPosition(this->snake->getPositionsAmmount() - snake->getSize() - 1));
 		}
 
-		Sleep(500);
+		Sleep(500 / this->speed);
 	}
-	cout << "KONIEC";
+	cout << endl << endl << "KONIEC";
 }

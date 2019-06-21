@@ -10,6 +10,7 @@
 class SnakeEngine
 {
 private:
+	int speed;
 	GraphicsEngine* graphicsEngine;
 	Snake* snake;
 	Score* score;
@@ -20,6 +21,6 @@ private:
 	AbstractController* controlManager;
 
 public:
-	SnakeEngine(GraphicsEngine* graphicsEngine, Snake* snake, Score* score, Map* map, ScoreCollisionEngine* scoreCollisionEngine, SnakeCollisionEngine* snakeCollisionEngine, WallCollisionEngine* wallCollisionEngine, AbstractController* controlManager);
+	SnakeEngine(GraphicsEngine* graphicsEngine, Snake* snake, Score* score, Map* map, ScoreCollisionEngine* scoreCollisionEngine, SnakeCollisionEngine* snakeCollisionEngine, WallCollisionEngine* wallCollisionEngine, AbstractController* controlManager, int speed);
 	void run();
 };

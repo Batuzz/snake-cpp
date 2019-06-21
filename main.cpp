@@ -7,22 +7,29 @@
 #include "AbstractController.h"
 #include "KeyboardController.h"
 #include "Score.h"
-
+#include "Settings.h"
+#include <iostream>
 
 int main()
 {
-	
-	GraphicsEngine* graphicsEngine = new GraphicsEngine;
-	Snake* snake = new Snake('o' , new Point(9, 10), 5);
-	Score* score = new Score(1, (char)4);
-	Map* map = new Map(100, 25, 'X');
-	ScoreCollisionEngine* scoreCollisionEngine = new ScoreCollisionEngine;
-	SnakeCollisionEngine* snakeCollisionEngine = new SnakeCollisionEngine(snake);
-	WallCollisionEngine* wallCollisionEngine = new WallCollisionEngine(map->getWidth(), map->getHeight());
-	KeyboardController* keyboardController = new KeyboardController;
+	try {
+		Settings* settings = new Settings("settings.cfg");
+		settings->loadSettings();
 
-	SnakeEngine* snakeEngine = new SnakeEngine(graphicsEngine, snake, score, map, scoreCollisionEngine, snakeCollisionEngine, wallCollisionEngine, keyboardController);
-	snakeEngine->run();
+		GraphicsEngine* graphicsEngine = new GraphicsEngine;
+		Snake* snake = new Snake(settings->snakeCharacter , settings->snakeStartPosition, settings->snakeStartSize);
+		Score* score = new Score(settings->scoreValue, settings->scoreCharacter);
+		Map* map = new Map(settings->mapWidth, settings->mapHeight, settings->mapCharacter);
+		ScoreCollisionEngine* scoreCollisionEngine = new ScoreCollisionEngine;
+		SnakeCollisionEngine* snakeCollisionEngine = new SnakeCollisionEngine(snake);
+		WallCollisionEngine* wallCollisionEngine = new WallCollisionEngine(map->getWidth(), map->getHeight());
+		KeyboardController* keyboardController = new KeyboardController;
+
+		SnakeEngine* snakeEngine = new SnakeEngine(graphicsEngine, snake, score, map, scoreCollisionEngine, snakeCollisionEngine, wallCollisionEngine, keyboardController, settings->speed);
+		snakeEngine->run();
+	} catch (const std::invalid_argument & e) {
+		std::cout << e.what() << std::endl;
+	}
 
     return 0;
 }
